@@ -1,0 +1,12 @@
+name: PiglinNames
+version: ${project.version}
+main: org.acornmc.piglinnames.PiglinNames
+api-version: 1.16
+authors: [DrBot]
+description: Change rank colors
+depend:
+  - Essentials
+commands:
+  prefix:
+    description: change prefix color
+    usage: "/<command> argument"

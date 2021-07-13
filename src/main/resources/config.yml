@@ -1,0 +1,15 @@
+prefix:
+  1:
+    regex: "(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?"
+    permissions:
+      - group.vip
+      - "!group.mod"
+    commands:
+      - lp user <player> meta removeprefix 1
+      - lp user <player> meta addprefix 1 "<argument>&lVIP&f"
+  2:
+    regex: "none"
+    permissions:
+      - group.vip
+    commands:
+      - lp user <player> meta removeprefix 1
