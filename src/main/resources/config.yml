@@ -1,15 +1,147 @@
 prefix:
-  1:
-    regex: "(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?"
+  '1':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?
     permissions:
-      - group.vip
-      - "!group.mod"
+    - group.vip
+    - '!group.mod'
     commands:
-      - lp user <player> meta removeprefix 1
-      - lp user <player> meta addprefix 1 "<argument>&lVIP&f"
-  2:
-    regex: "none"
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&lVIP&f"
+  '2':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lV(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lP
     permissions:
-      - group.vip
+    - group.vip
+    - '!group.mod'
     commands:
-      - lp user <player> meta removeprefix 1
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '3':
+    regex: (?i)(none|off|clear|reset|remove)
+    permissions:
+    - group.vip
+    commands:
+    - lp user <player> meta removeprefix 1
+  '4':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lD(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lE(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lT(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lY
+    permissions:
+    - group.vip
+    - group.deity
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '5':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lM(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lM(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lO(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lR(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lT(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lL
+    permissions:
+    - group.vip
+    - group.immortal
+    - '!group.deity'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '6':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lD(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lV(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lE
+    permissions:
+    - group.vip
+    - group.divine
+    - '!group.immortal'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '7':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lC(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lE(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lT
+    permissions:
+    - group.vip
+    - group.ancient
+    - '!group.divine'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '8':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lL(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lE(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lG(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lE(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lT
+    permissions:
+    - group.vip
+    - group.legend
+    - '!group.ancient'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '9':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lT(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lT(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN
+    permissions:
+    - group.vip
+    - group.titan
+    - '!group.legend'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '10':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lR(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lC(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lH(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lO(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN
+    permissions:
+    - group.vip
+    - group.archon
+    - '!group.titan'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '11':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lC(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lR(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lU(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lS(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lD(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lE(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lR
+    permissions:
+    - group.vip
+    - group.crusader
+    - '!group.archon'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '12':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lG(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lU(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lR(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lD(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN
+    permissions:
+    - group.vip
+    - group.guardian
+    - '!group.crusader'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '13':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lO(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lV(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lC(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lE
+    permissions:
+    - group.vip
+    - group.novice
+    - '!group.guardian'
+    - '!group.mod'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '14':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lM(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lO(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lD
+    permissions:
+    - group.vip
+    - group.mod
+    - '!group.admin'
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '15':
+    regex: (&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lA(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lD(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lM(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lI(&#[0-9a-fA-F]{6})?(&[0-9a-fA-F])?&lN
+    permissions:
+    - group.vip
+    - group.admin
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
+  '16':
+    regex: .*
+    permissions:
+    - group.vip
+    - group.owner
+    commands:
+    - lp user <player> meta removeprefix 1
+    - lp user <player> meta addprefix 1 "<argument>&f"
