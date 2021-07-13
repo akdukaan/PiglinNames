@@ -16,7 +16,6 @@ public class CommandPrefix implements CommandExecutor {
     }
 
     public boolean validatePerms(CommandSender sender, List<String> permissions) {
-        // Check for permission
         for (String perm : permissions) {
             if (perm.startsWith("!")) {
                 if (sender.hasPermission(perm.substring(1))) {
@@ -42,6 +41,7 @@ public class CommandPrefix implements CommandExecutor {
         for (String key : cs.getKeys(false)) {
             boolean hasAllPerms = validatePerms(sender, configManager.get().getStringList("prefix." + key + ".permissions"));
             if (hasAllPerms) {
+
                 //Check regex
                 String regex = configManager.get().getString("prefix." + key + ".regex");
                 if (args[0].matches(regex)) {

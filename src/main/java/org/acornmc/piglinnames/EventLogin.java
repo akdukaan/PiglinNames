@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,32 +25,51 @@ public class EventLogin implements Listener {
 
     @EventHandler
     public void onLogin(final PlayerLoginEvent event) {
+        new Thread(() -> {
+            // reset prefix if no longer vip
+            Player p = event.getPlayer();
+            if (!p.hasPermission("piglinnames.keepprefix")) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " meta removeprefix 1");
+                    }
+                }.runTask(iess);
+            }
 
-        // reset prefix if no longer vip
-        Player p = event.getPlayer();
-        if (!p.hasPermission("piglinnames.keepprefix")) {
-            System.out.println("resetting prefix for player");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " removeprefix 1");
-        }
+            User user = iess.getUserMap().getUser(p.getName());
+            String nick = user.getNickname();
+            System.out.println("1.1 " + p.getName());
+            System.out.println("2.1 " + nick);
+            String stripnick = ChatColor.stripColor(nick);
+            if (stripnick == null) {
+                return;
+            }
 
-        // reset nickname
-        User user = iess.getUserMap().getUser(p.getName());
-        String nick = user.getNick(false, false);
-        System.out.println("1.1 " + p.getName());
-        System.out.println("2.1 " + nick);
-        if (nick == null) {
-            return;
-        }
-        String stripnick = ChatColor.stripColor(nick);
-        if (!p.hasPermission("piglinnames.keepnickname") && !stripnick.equals(nick)) {
-            System.out.println("resetting nickname for player because no longer vip");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
-            return;
-        }
-        if (oldName(p.getName(), stripnick)) {
-            System.out.println("resetting nickname for player because changed name");
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
-        }
+            // if not vip and nick was colored
+            if (!p.hasPermission("piglinnames.keepnickname") && !stripnick.equals(nick)) {
+                System.out.println("resetting nickname for player because no longer vip");
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
+                    }
+                }.runTask(iess);
+                return;
+            }
+
+            // if they have a nick with text different than their name
+            // and the nick has been their name in the past
+            if (!p.getName().equals(stripnick) && oldName(p.getName(), stripnick) && p.hasPermission("piglinnames.drbot")) {
+                System.out.println("resetting nickname for player because changed name");
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
+                    }
+                }.runTask(iess);
+            }
+        }).start();
 
         // removenick if
         // colored nick and not VIP
@@ -58,6 +78,7 @@ public class EventLogin implements Listener {
     }
 
     public boolean oldName(String playername, String stripnick) {
+
         try {
             PreviousPlayerNameEntry[] entries = getPlayerPreviousNames(playername);
             for (PreviousPlayerNameEntry entry : entries) {
