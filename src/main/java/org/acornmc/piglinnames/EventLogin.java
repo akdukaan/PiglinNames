@@ -41,39 +41,56 @@ public class EventLogin implements Listener {
             String nick = user.getNickname();
             System.out.println("1.1 " + p.getName());
             System.out.println("2.1 " + nick);
-            String stripnick = ChatColor.stripColor(nick);
-            if (stripnick == null) {
+
+            // admin nicked because caps = return if their nick is a caps-different version of name
+            // admin nicked because inappropriate = return if nick has never veeb theur bane; else unnic
+            // self added color & vip = return;
+            // self added color & not vip anymore - unnik
+            // changed name - unnik
+
+            // if no nick
+            if (nick == null) {
                 return;
             }
 
-            // if not vip and nick was colored
-            if (!p.hasPermission("piglinnames.keepnickname") && !stripnick.equals(nick)) {
-                System.out.println("resetting nickname for player because no longer vip");
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
-                    }
-                }.runTask(iess);
-                return;
-            }
+            String stripNick = ChatColor.stripColor(nick);
+            boolean coloredNick = !stripNick.equals(nick);
 
-            // if they have a nick with text different than their name
-            // and the nick has been their name in the past
-            if (!p.getName().equals(stripnick) && oldName(p.getName(), stripnick) && p.hasPermission("piglinnames.drbot")) {
-                System.out.println("resetting nickname for player because changed name");
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
+            if (coloredNick) {
+                if (p.hasPermission("piglinnames.keepnickname")) {
+                    if (!p.getName().equalsIgnoreCase(stripNick)) {
+                        // actually i should only be doing this if they using an old name. I'll do this when i wanna deal with mojangapi
+                        System.out.println("resetting nickname for player reason 1");
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
+                            }
+                        }.runTask(iess);
                     }
-                }.runTask(iess);
+                    return;
+                } else {
+                    System.out.println("resetting nickname for player reason 2");
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
+                        }
+                    }.runTask(iess);
+                }
+            } else {
+                if (p.hasPermission("piglinnames.previouslynicked")) {
+                    System.out.println("resetting nickname for player reason 3");
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "nick " + p.getName() + " off");
+                        }
+                    }.runTask(iess);
+                }
+                // else if they are using an old name, change it (i'll do this when i wanna deal with mojangapi) !
             }
         }).start();
-
-        // removenick if
-        // colored nick and not VIP
-        // nick.stripcolor is equalignorecase as an old name
 
     }
 
@@ -124,12 +141,17 @@ public class EventLogin implements Listener {
     private static String getRawJsonResponse(URL u) throws IOException {
         HttpURLConnection con = (HttpURLConnection) u.openConnection();
         con.setDoInput(true);
-        con.setConnectTimeout(2000);
-        con.setReadTimeout(2000);
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
+        System.out.println("line 133");
         con.connect();
+        System.out.println("line 134");
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        System.out.println("line 135");
         String response = in.readLine();
+        System.out.println("line 136");
         in.close();
+        System.out.println("line 138");
         return response;
     }
 
