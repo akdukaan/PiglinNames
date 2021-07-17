@@ -28,7 +28,7 @@ public class EventLogin implements Listener {
         new Thread(() -> {
             // reset prefix if no longer vip
             Player p = event.getPlayer();
-            if (!p.hasPermission("piglinnames.keepprefix")) {
+            if (!p.hasPermission("piglinnames.keepprefix") && p.hasPermission("piglinnames.previouslynicked")) {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
@@ -39,16 +39,6 @@ public class EventLogin implements Listener {
 
             User user = iess.getUserMap().getUser(p.getName());
             String nick = user.getNickname();
-            System.out.println("1.1 " + p.getName());
-            System.out.println("2.1 " + nick);
-
-            // admin nicked because caps = return if their nick is a caps-different version of name
-            // admin nicked because inappropriate = return if nick has never veeb theur bane; else unnic
-            // self added color & vip = return;
-            // self added color & not vip anymore - unnik
-            // changed name - unnik
-
-            // if no nick
             if (nick == null) {
                 return;
             }
