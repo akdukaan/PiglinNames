@@ -38,6 +38,9 @@ public class EventLogin implements Listener {
             }
 
             User user = iess.getUserMap().getUser(p.getName());
+            if (user == null) {
+                return;
+            }
             String nick = user.getNickname();
             if (nick == null) {
                 return;
